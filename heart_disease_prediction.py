@@ -32,7 +32,7 @@ X_test_scaler= scaler.fit_transform(X_test)
 
 
 # Create and train the model
-model= LogisticRegression()
+model= GaussianNB()
 model.fit(X_train_scaler, y_train)
 # Load your trained machine learning model
 # model_path = r'D:\Tanvi2022\Data Science Honours Project\naive_bayes_model.pkl'
@@ -112,7 +112,7 @@ thal_dict = {
     'Reversible Defect': 2
 }
 
-model_path = r'Data Science Honours Project\naive_bayes_model.pkl'
+model_path = r'naive_bayes_model.pkl'
 model = joblib.load(model_path)
 
 # # Load the model from a file
