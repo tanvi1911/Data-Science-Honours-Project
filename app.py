@@ -3,42 +3,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import pickle
-from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
-
-
-df = pd.read_csv('HealthData.csv')
-df = df.rename(columns={'num':'target'})
-
-df['ca'] = df['ca'].fillna(df['ca'].mean())
-df['thal'] = df['thal'].fillna(df['thal'].mean())
-
-X = df.drop(columns = 'target')
-y = df.target
-
-# splitting our dataset into training and testing for this we will use train_test_split library.
-X_train, X_test, y_train, y_test= train_test_split(X, y, test_size= 0.25, random_state=42)
-print('X_train size: {}, X_test size: {}'.format(X_train.shape, X_test.shape))
-
 from sklearn.preprocessing import StandardScaler
 
-#feature scaling
-scaler= StandardScaler()
-X_train_scaler= scaler.fit_transform(X_train)
-X_test_scaler= scaler.fit_transform(X_test)
-
-
-# Create and train the model
-model= GaussianNB()
-model.fit(X_train_scaler, y_train)
-# Load your trained machine learning model
-# model_path = r'D:\Tanvi2022\Data Science Honours Project\naive_bayes_model.pkl'
-# joblib.load(model_path)
-model_path = 'naive_bayes_model.pkl'
+# Load the trained machine learning model
+model_path = r'D:\Tanvi2022\Data Science Honours Project\naive_bayes_model.pkl'
 model = joblib.load(model_path)
-
-
 
 # Define explanations for medical terms
 term_explanations = {
@@ -57,11 +27,9 @@ term_explanations = {
     'thal': "The result of the thallium stress test. It can have three values.",
 }
 
-
 # Create the Streamlit web app
 st.title('Heart Disease Prediction')
 selected_term = st.selectbox('Select a Medical Term', list(term_explanations.keys()))
-
 
 # Display the explanation based on the selected term
 if selected_term in term_explanations:
@@ -112,24 +80,6 @@ thal_dict = {
     'Reversible Defect': 2
 }
 
-
-
-# # Load the model from a file
-# with open('naive_bayes_model.pkl', 'rb') as file:
-#     loaded_model = pickle.load(file)
-
-# Make predictions
-# data = np.array([age, sex, cp_dict[cp], trestbps, chol, fbs, restecg_dict[restecg], thalach, exang, oldpeak, slope_dict[slope], ca, thal_dict[thal]]).reshape(1, -1)
-
-# prediction = model.predict(data)
-
-# # Display prediction
-# st.button('Prediction:')
-# if prediction[0] == 1:
-#     st.write('The model predicts that you have a heart disease.')
-# else:
-#     st.write('The model predicts that you do not have a heart disease.')
-
 if st.button('Predict Heart Risk'):
     # Map categorical inputs to numerical values
     cp_value = cp_dict[cp]
@@ -149,5 +99,3 @@ if st.button('Predict Heart Risk'):
         st.write('The model predicts that you have a heart disease.')
     else:
         st.write('The model predicts that you do not have a heart disease.')
-
-
