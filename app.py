@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 # Load the trained machine learning model
-model_path = r'D:\Tanvi2022\Data Science Honours Project\naive_bayes_model.pkl'
+model_path = r'naive_bayes_model.pkl'
 model = joblib.load(model_path)
 
 # Define explanations for medical terms
