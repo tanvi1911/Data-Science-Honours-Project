@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 pandas
 joblib
+=======
+pandas
+joblib
+>>>>>>> acb08d913eb642ee63296d10d4922217f7200972
 scikit-learn
