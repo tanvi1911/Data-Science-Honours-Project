@@ -112,7 +112,7 @@ thal_dict = {
     'Reversible Defect': 2
 }
 
-model_path = r'D:\Tanvi2022\Data Science Honours Project\naive_bayes_model.pkl'
+model_path = r'Data Science Honours Project\naive_bayes_model.pkl'
 model = joblib.load(model_path)
 
 # # Load the model from a file
